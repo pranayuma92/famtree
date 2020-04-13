@@ -2,7 +2,7 @@
 
 (function(){
 	jQuery.ajax({
-		url: 'http://127.0.0.1/wp-json/famtree/v1/get-data',
+		url: famtree_vars.baseurl,
 		type: 'GET',
 		success: function(res){
 			console.log(res)

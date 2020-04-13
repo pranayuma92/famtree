@@ -15,7 +15,17 @@ function initFamTree(){
 
 function famtree_scripts(){
     wp_enqueue_script('d3-js', FT_PLUGIN_URL . 'assets/js/d3.min.js', array());
-    wp_enqueue_script('app-js', FT_PLUGIN_URL . 'assets/js/app.js', array('jquery'), '1.0', true);
+    //wp_enqueue_script('app-js', FT_PLUGIN_URL . 'assets/js/app.js', array('jquery'), '1.0', true);
+    wp_register_script( 'app-js', FT_PLUGIN_URL . 'assets/js/app.js', array('jquery'), '1.0', true );
+ 
+    // Localize the script with new data
+    $translation_array = array(
+        'baseurl' => home_url('/wp-json/famtree/v1/get-data'),
+    );
+    wp_localize_script( 'app-js', 'famtree_vars', $translation_array );
+     
+    // Enqueued script with localized data.
+    wp_enqueue_script( 'app-js' );
 }
 
 function famtree_rest_route(){
